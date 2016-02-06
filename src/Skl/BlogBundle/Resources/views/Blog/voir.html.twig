@@ -10,15 +10,10 @@ Lecture d'un article - {{ parent() }}
 </div>
 <p>
 <a href="{{ path('accueil') }}" class="btn">
-<i class="icon-chevron-left"></i>Retour à la liste
-</a>
-<a href="{{ path('article_modifier', {'id': article.id}) }}" class="btn">
-<i class="icon-edit"></i>
-Modifier l'article
-</a>
-<a href="{{ path('article_supprimer', {'id': article.id}) }}" class="btn">
-<i class="icon-trash"></i>
-Supprimer l'article
-</a>
+<i class="icon-chevron-left"></i>Retour à la liste </a>
+        <a href="{{ path('article_modifier', {'id': article.id}) }}" class="btn">
+        <i class="icon-edit"></i>Modifier l'article</a>
+       <a href="{{ path('article_supprimer', {'id': article.id}) }}" class="btn">
+       <i class="icon-trash"></i>Supprimer l'article</a>
 </p>
 {% endblock %}

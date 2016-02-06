@@ -1,0 +1,11 @@
+#menu{
+  width: 225px;
+  vertical-align: top;
+  display: inline-block;
+  
+}
+#content{
+    width: 900px;
+     vertical-align: top;
+    display: inline-block;
+}
