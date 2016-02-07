@@ -5,3 +5,18 @@ services:
 #    blog.example:
 #        class: %blog.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+        blog.antispam:
+               class: Skl\BlogBundle\Antispam\SklAntispam
+               arguments: [@mailer, %locale%, 3]
+               
+        blog.beta_listener:
+          class:   Skl\BlogBundle\Beta\BetaListener
+          arguments:  ["2016-02-10"]
+          tags:
+            -   { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+        
+        blog.censure_listener:
+              class: Skl\BlogBundle\Bigbrother\CensureListener
+              arguments:  [[1, 2], @mailer]
+              tags:
+                - { name: kernel.event_listener, event: blog.bigbrother.post_message, method: onMessagePost }

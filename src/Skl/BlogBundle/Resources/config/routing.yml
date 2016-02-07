@@ -21,10 +21,21 @@ article_modifier:
         id:   \d+
    
 article_supprimer:
-    pattern:  /article/{id}
+    pattern:  /article/supprimer/{id}
     defaults: { _controller: BlogBundle:Blog:supprimer }
     requirements:
         id:   \d+
+article_menu:
+    pattern:  /article/menu
+    defaults: { _controller: BlogBundle:Blog:menu }
+    
+article_test:
+    pattern:  /antivirus/test
+    defaults: { _controller: BlogBundle:Blog:test }
+
+article_test2:
+    pattern:  /test2
+    defaults: { _controller: BlogBundle:Blog:test2 }
     
      
 
