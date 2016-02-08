@@ -1,0 +1,20 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block title %}
+Accueil - {{ parent() }}
+{% endblock %}
+{% block blog_body %}
+<h2>Liste des produits</h2>
+<ul>
+{% for produit in produits %}
+<li>
+<a href="{{ path('article_voir', {'id': produit.id}) }}">{{
+produit.titre }}</a>
+par {{ produit.auteur }},
+le {{ produit.date|date('d/m/Y') }}
+</li>
+{% else %}
+<li>Pas (encore !) d'articles</li>
+{% endfor %}
+</ul>
+{% endblock %}
