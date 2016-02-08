@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProduitsType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,8 @@ class ProduitsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('description')
-            ->add('prix')
-            ->add('poids')
-            ->add('disponible')
-            ->add('image', new ImageType());
+            ->add('url')
+            ->add('alt');
     }
 
     /**
@@ -29,7 +25,7 @@ class ProduitsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Skl\BlogBundle\Entity\Produits'
+            'data_class' => 'Skl\BlogBundle\Entity\Image'
         ));
     }
 
@@ -38,6 +34,6 @@ class ProduitsType extends AbstractType
      */
     public function getName()
     {
-        return 'skl_blogbundle_produitstype';
+        return 'skl_blogbundle_imagetype';
     }
 }
