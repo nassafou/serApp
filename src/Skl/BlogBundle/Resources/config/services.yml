@@ -9,9 +9,6 @@ services:
                class: Skl\BlogBundle\Antispam\SklAntispam
                arguments: [@mailer, %locale%, 3]
                
-       tag:
-      class: Ecommerce\EcommerceBundle\Twig\Extension\TvaExtension
-      tags:
-        - {name: twig.extension}
+       
         
         

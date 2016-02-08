@@ -5,6 +5,8 @@ namespace Skl\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Skl\BlogBundle\Entity\Article;
 use Skl\BlogBundle\Form\ArticleType;
+use Skl\BlogBundle\Form\ProduitsType;
+use Skl\BlogBundle\Entity\Produits;
 
 class ProduitsController extends Controller
 {
@@ -15,16 +17,13 @@ class ProduitsController extends Controller
          // Appel de l'entity
          $em       = $this->getDoctrine()->getManager();
          //Recupération des données de la base
-         $articles = $em->getRepository('BlogBundle:Article')->findAll();
+         $articles = $em->getRepository('BlogBundle:Produits')->findAll();
          // envoie a la vue
-         
-         $message = "ici";
-         
+         $message  = "ici";
          //var_dump($articles);
          //die();
-         
-        return $this->render('BlogBundle:Blog:index.html.twig', array('articles' => $articles,
-                                                                      'message'  => $message));
+        return $this->render('BlogBundle:Produits:index.html.twig', array('produits' => $articles,
+                                                                          'message'  => $message));
     }
     
     
@@ -37,9 +36,9 @@ class ProduitsController extends Controller
         // entity
         $em      = $this->getDoctrine()->getManager();
         //recuperation de l'article à voir
-        $article = $em->getRepository('BlogBundle:Article')->find($id);
+        $article = $em->getRepository('BlogBundle:Produits')->find($id);
         
-        return $this->render('BlogBundle:Blog:voir.html.twig', array(    'id'      => $id,
+        return $this->render('BlogBundle:Produits:voir.html.twig', array('id'      => $id,
                                                                          'article' => $article));
     }
     
@@ -48,9 +47,9 @@ class ProduitsController extends Controller
         //entiy
         $em = $this->getDoctrine()->getManager();
         //création de l'objet
-        $article = new Article();
+        $article = new Produits();
         //Creation du formulaire
-        $form = $this->createForm(new ArticleType(), $article );
+        $form = $this->createForm(new ProduitsType(), $article );
         //créationd de la requete
         $request = $this->get('request');
         // vérifier si la requete est GET ou POST
@@ -68,7 +67,7 @@ class ProduitsController extends Controller
             return $this->redirect($this->generateUrl('accueil'));
             }
         }
-        return $this->render('BlogBundle:Blog:ajouter.html.twig', array('form' => $form->createView()));
+        return $this->render('BlogBundle:Produits:ajouter.html.twig', array('form' => $form->createView()));
     }
     
     public function modifierAction($name)
@@ -80,11 +79,10 @@ class ProduitsController extends Controller
         }
         $em      = $this->getDoctrine()->getManager();
         // recupération de l'id
-        $article = $em->getReposite('BlogBundle:Article')->find($id);
+        $article = $em->getReposite('BlogBundle:Produits')->find($id);
         //Formulaire
-        $form    = $this->createForm(new ArticleType(), $article);
+        $form    = $this->createForm(new ProduitsType(), $article);
         $request = $this-get('request');
-        
         //vérification
         if($request->getMethod()== 'POST')
         {     //lié le formulaire et la requete
@@ -98,47 +96,42 @@ class ProduitsController extends Controller
               return $this->redirect($this->generateUrl('accueil'));
             }
         }
-        return $this->render('BlogBundle:Blog:ajouter.html.twig', array( 'form' => $form->createView(),
+        return $this->render('BlogBundle:Produits:ajouter.html.twig', array( 'form' => $form->createView(),
                                                                          'id'   => $id  ));
     }
     
-    public function supprimerAction(Article $article)
+    public function supprimerAction(Produits $article)
     {
-        
-        $form = $this->createFormBuilder()->getForm();
-        
+        $form    = $this->createFormBuilder()->getForm();
         // vérification
         if(!isset($id)){
             throw  $this->createNotFoundException('404, not Found');
         }
         $request = $this->getRequest();
-        
         if($request->getMethod()== 'POST'){
             
             if($form->isValid())
             {
                 $em      = $this->getDoctrine()->getManager();
-                $article = $em->getRepository('BlogBundle:Article')->find($id);
+                $article = $em->getRepository('BlogBundle:Produits')->find($id);
                 $em->remove($article);
                 $em->flush();
                 // On définit un message flash
                 $this->get('session')->getFlashBag()->add('info','Article bien supprimé');
-                
                 //Puis on redirige vers l'accueil
                 return $this->redirect($this->generateUrl('accueil'));
             }
         }
         // si la réponse est en get, on affiche une page de confirmation avant de supprimé
-        
-        return $this->render('BlogBundle:Blog:suprimer.html.twig', array('article' => $article,
+        return $this->render('BlogBundle:Produits:suprimer.html.twig', array('article' => $article,
                                                                          'form'    => $form->createView()));
     }
     public function menuAction($nombre)
     {
-        $em      = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('BlogBundle:Article')->findAll();
+        $em    = $this->getDoctrine()->getManager();
+        $liste = $em->getRepository('BlogBundle:Produits')->findAll();
         
-        return $this->render('BlogBundle:Blog:menu.html.twig', array('liste_articles' => $liste));
+        return $this->render('BlogBundle:Produits:menu.html.twig', array('liste_articles' => $liste));
         
     }
     
@@ -148,8 +141,7 @@ class ProduitsController extends Controller
     {
        //On recupere le service d'abord
        $antispam = $this->container->get('blog.antispam');
-       
-       $text =" tttt@gmail.com; hhhhj@yahoo.fr;  hhigigv@gygugy.vb" ;
+       $text     =" tttt@gmail.com; hhhhj@yahoo.fr;  hhigigv@gygugy.vb" ;
        
        if($antispam->isSpam($text))
        {
@@ -160,8 +152,7 @@ class ProduitsController extends Controller
     public function test2Action()
     {
         //entity
-        $em = $this->getDoctrine()->getManager();
-        
+        $em         = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('BlogBundle:Article')
                          ->myFindAll();
         

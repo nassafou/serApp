@@ -12,5 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProduitsRepository extends EntityRepository
 {
-    
+     public function recherche($chaine)
+    {
+        // création d'un objet
+        
+        
+        $qb = $this->createQueryBuilder('u')
+                   ->select('u')
+                   ->where('u.nom like :chaine')
+                   ->andWhere('u.disponible = 1')
+                   ->orderBy('u.id ')
+                   ->setParameter('chaine', $chaine);
+                   
+        return $qb->getQuery()->getResult();
+        
+        
+    }
 }

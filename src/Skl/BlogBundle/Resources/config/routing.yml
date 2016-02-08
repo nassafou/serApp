@@ -37,8 +37,19 @@ article_test:
 article_test2:
     pattern:  /test2
     defaults: { _controller: BlogBundle:Blog:test2 }
+
+pro_accueil:
+    pattern:  /produits/{page}
+    defaults: { _controller: BlogBundle:Produits:index, page: 1 }
+    requirements:
+        page: \d*
     
 pro_ajouter:
     pattern:  /produits/ajouter
     defaults: { _controller: BlogBundle:Produits:ajouter }
 
+pro_voir:
+    pattern:  /produits/voir/{id}
+    defaults: { _controller: BlogBundle:Produits:voir }
+    requirements:
+        id:   \d+

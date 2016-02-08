@@ -8,10 +8,11 @@ Accueil - {{ parent() }}
 <ul>
 {% for produit in produits %}
 <li>
-<a href="{{ path('article_voir', {'id': produit.id}) }}">{{
-produit.titre }}</a>
-par {{ produit.auteur }},
-le {{ produit.date|date('d/m/Y') }}
+<a href="{{ path('pro_voir', {'id': produit.id}) }}">{{ produit.nom }}</a>
+ {{ produit.description }},
+ 
+ Prix: {{ produit.prix }}
+ Poids: {{ produit.poids }}
 </li>
 {% else %}
 <li>Pas (encore !) d'articles</li>
