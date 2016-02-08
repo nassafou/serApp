@@ -1,11 +1,41 @@
 {% extends "::layout.html.twig" %}
 {% block title %}
-Blog - {{ parent() }}
+Catalogue - {{ parent() }}
 {% endblock %}
 {% block body %}
 {# On définit un sous-titre commun à toutes les pages du bundle,
 par exemple #}
-<h1>Blog</h1>
+<h1>Catalogue</h1>
+<div>
+<div class="well">
+     <form>
+<div class="filtre">
+    <p>Filtrer</p>
+<ul>
+    <li><a href="#">Tag1</a></li>
+    <li><a href="#">Tag2</a></li>
+    <li><a href="#">Tag3</a></li>
+    
+</ul>
+</div>
+<div class="Tri">
+    <p><p>Filtrer</p></p>
+<ul>
+    <li>Prix</li>
+    <li>Poids</li>
+    
+</ul>
+</div>
+ <form>
+
+<div class="well">
+    <form action="" method="POST">
+        Recherche
+        <input type="text" name="recherche">
+    </form>
+<input type="submit" value="OK"/>
+</div>
+</div>
 <hr>
 {# On définit un nouveau bloc, que les vues du bundle pourront
 remplir #}

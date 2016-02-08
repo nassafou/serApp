@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Skl\BlogBundle\Entity\Article;
 use Skl\BlogBundle\Form\ArticleType;
 
-class BlogController extends Controller
+class ProduitsController extends Controller
 {
     /*Affichage des articles a la page d'accueil
      */
@@ -17,7 +17,9 @@ class BlogController extends Controller
          //Recupération des données de la base
          $articles = $em->getRepository('BlogBundle:Article')->findAll();
          // envoie a la vue
-         $message  = "ici";
+         
+         $message = "ici";
+         
          //var_dump($articles);
          //die();
          
@@ -104,6 +106,7 @@ class BlogController extends Controller
     {
         
         $form = $this->createFormBuilder()->getForm();
+        
         // vérification
         if(!isset($id)){
             throw  $this->createNotFoundException('404, not Found');
@@ -111,7 +114,7 @@ class BlogController extends Controller
         $request = $this->getRequest();
         
         if($request->getMethod()== 'POST'){
-    
+            
             if($form->isValid())
             {
                 $em      = $this->getDoctrine()->getManager();
@@ -120,6 +123,7 @@ class BlogController extends Controller
                 $em->flush();
                 // On définit un message flash
                 $this->get('session')->getFlashBag()->add('info','Article bien supprimé');
+                
                 //Puis on redirige vers l'accueil
                 return $this->redirect($this->generateUrl('accueil'));
             }
@@ -131,12 +135,13 @@ class BlogController extends Controller
     }
     public function menuAction($nombre)
     {
-        $em    = $this->getDoctrine()->getManager();
+        $em      = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('BlogBundle:Article')->findAll();
         
         return $this->render('BlogBundle:Blog:menu.html.twig', array('liste_articles' => $liste));
         
     }
+    
     
     
     public function testAction()

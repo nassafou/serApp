@@ -14,6 +14,7 @@ article_ajouter:
     pattern:  /article/ajouter
     defaults: { _controller: BlogBundle:Blog:ajouter }
     
+    
 article_modifier:
     pattern:  /article/modifier/{id}
     defaults: { _controller: BlogBundle:Blog:index }
@@ -37,5 +38,7 @@ article_test2:
     pattern:  /test2
     defaults: { _controller: BlogBundle:Blog:test2 }
     
-     
+pro_ajouter:
+    pattern:  /produits/ajouter
+    defaults: { _controller: BlogBundle:Produits:ajouter }
 

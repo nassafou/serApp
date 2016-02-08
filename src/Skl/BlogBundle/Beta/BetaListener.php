@@ -10,6 +10,7 @@ class BetaListener
      *Avant cette date, on affichera un compte à rebours (J-3) par exemple
      *Après cette date on n'affichera plus le <<beta>>
      */
+    /*
     protected $dateFin;
     
     public function __construct($dateFin)
@@ -58,3 +59,6 @@ class BetaListener
         
     }
  }
+ */
+}
+ 
