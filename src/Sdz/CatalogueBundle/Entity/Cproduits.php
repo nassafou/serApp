@@ -1,26 +1,17 @@
 <?php
 
-namespace Skl\BlogBundle\Entity;
+namespace Sdz\CatalogueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produits
+ * Cproduits
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Skl\BlogBundle\Repository\ProduitsRepository")
+ * @ORM\Entity(repositoryClass="Sdz\CatalogueBundle\Entity\CproduitsRepository")
  */
-class Produits
+class Cproduits
 {
-    
-    /**
-     *@ORM\OneToOne(targetEntity="Skl\BlogBundle\Entity\Image",  cascade={"persist","remove"})
-     *@ORM\JoinColumn(nullable=false)
-     */
-    private $image;
-    
-    
-    
     /**
      * @var integer
      *
@@ -50,13 +41,6 @@ class Produits
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
-    
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="poids", type="float")
-     */
-    private $poids;
 
     /**
      * @var boolean
@@ -80,7 +64,7 @@ class Produits
      * Set nom
      *
      * @param string $nom
-     * @return Produits
+     * @return Cproduits
      */
     public function setNom($nom)
     {
@@ -103,7 +87,7 @@ class Produits
      * Set description
      *
      * @param string $description
-     * @return Produits
+     * @return Cproduits
      */
     public function setDescription($description)
     {
@@ -126,7 +110,7 @@ class Produits
      * Set prix
      *
      * @param float $prix
-     * @return Produits
+     * @return Cproduits
      */
     public function setPrix($prix)
     {
@@ -149,7 +133,7 @@ class Produits
      * Set disponible
      *
      * @param boolean $disponible
-     * @return Produits
+     * @return Cproduits
      */
     public function setDisponible($disponible)
     {
@@ -166,51 +150,5 @@ class Produits
     public function getDisponible()
     {
         return $this->disponible;
-    }
-
-    /**
-     * Set image
-     *
-     * @param \Skl\BlogBundle\Entity\Image $image
-     * @return Produits
-     */
-    public function setImage(\Skl\BlogBundle\Entity\Image $image)
-    {
-        $this->image = $image;
-    
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Skl\BlogBundle\Entity\Image 
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set poids
-     *
-     * @param float $poids
-     * @return Produits
-     */
-    public function setPoids($poids)
-    {
-        $this->poids = $poids;
-    
-        return $this;
-    }
-
-    /**
-     * Get poids
-     *
-     * @return float 
-     */
-    public function getPoids()
-    {
-        return $this->poids;
     }
 }

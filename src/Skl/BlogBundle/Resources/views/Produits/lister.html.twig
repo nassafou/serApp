@@ -1,0 +1,36 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+
+{% block blog_body %}
+    
+    <form id="form_recherche" action="{{ path('rechercheProduits' ) }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" value="Rechercher" />
+    </form>
+    <div class="loading"></div>
+    <div id="resultat_recherche">
+        {% include 'BlogBundle:Produits:lister.html.twig' %}
+    </div>
+    
+    <script>
+    $(".loading").hide();
+    $("#form_recherche").submit(function(){ 
+    $(".loading").show();
+    var motcle = $("#acteurrecherche_motcle").val();
+    var DATA = 'motcle=' + motcle;
+    $.ajax({
+        type: "POST",
+        url: "{{ path('rechercherProduits')}}",
+        data: DATA,
+        cache: false,
+        success: function(data){
+           $('#resultats_recherche').html(data);
+           $(".loading").hide();
+        }
+    });    
+    return false;
+});
+</script>
+    
+    
+{% endblock %}

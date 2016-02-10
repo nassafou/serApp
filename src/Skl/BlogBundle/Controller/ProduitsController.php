@@ -7,6 +7,7 @@ use Skl\BlogBundle\Entity\Article;
 use Skl\BlogBundle\Form\ArticleType;
 use Skl\BlogBundle\Form\ProduitsType;
 use Skl\BlogBundle\Entity\Produits;
+use Skl\BlogBundle\Form\RechercheType;
 
 class ProduitsController extends Controller
 {
@@ -45,11 +46,11 @@ class ProduitsController extends Controller
     public function ajouterAction()
     {
         //entiy
-        $em = $this->getDoctrine()->getManager();
+        $em      = $this->getDoctrine()->getManager();
         //création de l'objet
         $article = new Produits();
         //Creation du formulaire
-        $form = $this->createForm(new ProduitsType(), $article );
+        $form    = $this->createForm(new ProduitsType(), $article );
         //créationd de la requete
         $request = $this->get('request');
         // vérifier si la requete est GET ou POST
@@ -73,7 +74,7 @@ class ProduitsController extends Controller
     public function modifierAction($name)
     {
         //Vérification
-        if(!isset($id))
+        if(!isset( $id))
         {   //redirection
             return $this->redirect($this->generateUrl('ajouter'));
         }
@@ -97,7 +98,7 @@ class ProduitsController extends Controller
             }
         }
         return $this->render('BlogBundle:Produits:ajouter.html.twig', array( 'form' => $form->createView(),
-                                                                         'id'   => $id  ));
+                                                                             'id'   => $id  ));
     }
     
     public function supprimerAction(Produits $article)
@@ -124,7 +125,7 @@ class ProduitsController extends Controller
         }
         // si la réponse est en get, on affiche une page de confirmation avant de supprimé
         return $this->render('BlogBundle:Produits:suprimer.html.twig', array('article' => $article,
-                                                                         'form'    => $form->createView()));
+                                                                             'form'    => $form->createView()));
     }
     public function menuAction($nombre)
     {
@@ -135,14 +136,42 @@ class ProduitsController extends Controller
         
     }
     
+    public function listerAction(Produits $produits)
+    {
+        $em   = $this->getDoctrine()->getManager();
+        $form = $this->createForm( new RechercheType(), $produits); 
+        return  $this->render('BlogBundle:Produits:lister.html.twig', array('form'     => $form->createView(),
+                                                                           'produits' => $produits));   
+    }
     
+     public function rechercheAction()
+    {
+        //$em = $this->getDoctrine()->getManager();
+        //$liste = $em->getRepository('BlogBundle:Produits')->recherche($chaine);
+        $form = $this->createForm( new RechercheType()); 
+        return  $this->render('BlogBundle:Produits:recherche.html.twig', array('form' => $form->createView() ));   
+    }
+    
+    public function rechercheTraitementAction()
+    {
+            $form = $this->createForm( new RechercheType());    
+        if( $this->get('request')->getMethod() == 'POST'){
+            $form->bind($this->get('request'));
+            echo $form['recherche']->getData();
+            //die();
+            $em = $this->getDoctrine()->getManager();
+            $produits = $em->getRepository('BlogBundle:Produits')->recherche($form['recherche']->getData());
+        }else{
+            throw $this->createNotFoundException('La page n\'exist' );
+        }
+       return $this->render('BlogBundle:Produits:index.html.twig', array('produits' => $produits));
+    } 
     
     public function testAction()
     {
        //On recupere le service d'abord
        $antispam = $this->container->get('blog.antispam');
        $text     =" tttt@gmail.com; hhhhj@yahoo.fr;  hhigigv@gygugy.vb" ;
-       
        if($antispam->isSpam($text))
        {
         throw new \Exception('ce text est un spam');

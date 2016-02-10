@@ -1,0 +1,7 @@
+parameters:
+#    catalogue.example.class: Sdz\CatalogueBundle\Example
+
+services:
+#    catalogue.example:
+#        class: %catalogue.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

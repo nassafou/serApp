@@ -1,0 +1,23 @@
+catalogue_accueil:
+    pattern:  /catalogue/{page}
+    defaults: { _controller: CatalogueBundle:Produits:lister, page: 1 }
+    requirements:
+        page: \d*
+
+catalogue_ajouter:
+    pattern:  /catalogue/ajouter
+    defaults: { _controller: CatalogueBundle:Produits:ajouter }
+
+catalogue_modifier:
+    pattern:  /catalogue/modifier/{id}
+    defaults: { _controller: CatalogueBundle:Produits:modifier }
+    requirements:
+        id:   \d+
+
+catalogue_supprimer:
+    pattern:  /catalogue/supprimer/{id}
+    defaults: { _controller: CatalogueBundle:Produits:supprimer }
+    requirements:
+        id:   \d+
+
+

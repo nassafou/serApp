@@ -1,0 +1,12 @@
+ 
+ <p>
+    {{ produit.nom }}
+    
+ </p>
+ 
+ <form action="{{ path('catalogue_supprimer', {'id': produit.id }) }}" method="post">
+   <input type="submit" value="OUI">
+ </form>
+ 
+ <p><a href="{{ path('catalogue_accueil') }}">Retour a la liste</a></p>
+ 

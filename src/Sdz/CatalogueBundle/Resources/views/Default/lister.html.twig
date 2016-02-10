@@ -1,0 +1,22 @@
+ {# tableau pour lister #}
+ <table border=1px; padding=0px; margin=0px;>
+    <tr>
+        <th>Nom</th>
+        <th>description</th>
+        <th>Prix</th>
+        <th>Disponibilité</th>
+    </tr>
+ {% for p in produits %}
+     <tr>
+         <td>{{ p.nom }} </td>
+         <td> {{ p.description  }}</td>
+         <td>{{ p.prix }}</td>
+         <td>{{ p.disponible }}</td>
+         <td><a href="{{ path('catalogue_modifier', {'id': p.id}) }}">Modififer</a></td>
+         <td><a href="{{ path('catalogue_supprimer',{'id': p.id}) }}">Supprimer</a></td>
+     </tr>
+{% endfor %}
+    <tr>
+         <td> <a href="#">Ajouter</a></td>
+    </tr>
+ </table>

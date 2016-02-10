@@ -15,25 +15,19 @@ par exemple #}
     <li><a href="#">Tag1</a></li>
     <li><a href="#">Tag2</a></li>
     <li><a href="#">Tag3</a></li>
-    
 </ul>
 </div>
 <div class="Tri">
-    <p><p>Filtrer</p></p>
+    <p><p>Tri</p></p>
 <ul>
     <li>Prix</li>
-    <li>Poids</li>
-    
+    <li>Poids</li> 
 </ul>
 </div>
  <form>
 
 <div class="well">
-    <form action="" method="POST">
-        Recherche
-        <input type="text" name="recherche">
-    </form>
-<input type="submit" value="OK"/>
+    {% render(controller('BlogBundle:Produits:recherche')) %}
 </div>
 </div>
 <hr>

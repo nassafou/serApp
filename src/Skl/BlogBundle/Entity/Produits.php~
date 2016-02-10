@@ -190,27 +190,4 @@ class Produits
     {
         return $this->image;
     }
-
-    /**
-     * Set poids
-     *
-     * @param float $poids
-     * @return Produits
-     */
-    public function setPoids($poids)
-    {
-        $this->poids = $poids;
-    
-        return $this;
-    }
-
-    /**
-     * Get poids
-     *
-     * @return float 
-     */
-    public function getPoids()
-    {
-        return $this->poids;
-    }
 }
